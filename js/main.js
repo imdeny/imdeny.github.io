@@ -89,7 +89,7 @@ var Commands = function(hostline, user, group) {
                 "-------------------------------------------" +
                 "\n" +
                 "\n" +
-                utils.spanText('fghvc54',  "[discord]") + " -- deny#9999" + '\n' +
+                utils.spanText('fghvc54',  "[discord]") + " -- denyxo" + '\n' +
                 utils.spanText('fghvc54',  "[nintendo]") + " -- SW-2447-3939-2099" + '\n' +
                 softLink(user, group, 'steam', 'https://steamcommunity.com/id/bioodiust/') +
                 "\n" +
