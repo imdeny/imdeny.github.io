@@ -1,86 +1,47 @@
-.html {
-     background: radial-gradient(circle farthest-corner, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('../images/bg1.jpg') no-repeat center center fixed;
-    background-size: cover;
+body {
     background-color: #000;
-  }
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
 
-  .body {
-    /* color: #38e238; */
-    color: #FFF5E3;
-    margin: 2em;
-  }
+#terminal {
+    padding: 10px;
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
 
-  @font-face {
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-weight: normal;
-    src: "/js/main.js"
-  }
+#output {
+    white-space: pre-wrap;
+}
 
-  a {
-    font-weight: bold;
-    color: #597fd6;
-  }
+.input-line {
+    display: flex;
+    align-items: center;
+}
 
-  a:link,
-  a:visited {
-    text-decoration: none;
-  }
+.prompt {
+    margin-right: 10px;
+}
 
-  a:hover,
-  a:active {
-    text-decoration: underline;
-  }
-
-  .footer {
-    position: absolute;
-
-    bottom: 0;
-    right: 0;
-    padding: 1em;
-  }
-
-  .footer a {
-    font-weight: normal !important;
-  }
-
-  #textarea {
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 1em;
-    background-color: rgba(0,0,0, 0.3);
+input {
+    background-color: transparent;
+    border: none;
+    color: #0f0;
+    font-family: inherit;
+    font-size: inherit;
     width: 100%;
-    height: 100%;
-    white-space: pre;
-    margin: 0;
-  }
+    outline: none;
+}
 
-  .softlink {
-    color: #32c9e3;
-    font-weight: bold !important;
-  }
-  .fghvc54 {
-    color: #9363ff;
-  }
+input:focus {
+    animation: blink-animation 1s steps(2, start) infinite;
+}
 
-  .softlink-target {
-    color: #6394ff;
-    font-weight: bold !important;
-  }
-
-  .prompt-hostline {
-    color: #6394ff;
-    font-weight: bold !important;
-  }
-
-  .prompt-normal {
-    color: #FFF5E3;
-    font-weight: bold !important;
-  }
-
-  .prompt-path {
-    color: #6394ff;
-    font-weight: bold !important;
-  }
-
-  .command-output {
-    margin: 0;
-  }
+@keyframes blink-animation {
+    to {
+        visibility: hidden;
+    }
+}
