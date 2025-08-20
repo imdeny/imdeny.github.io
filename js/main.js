@@ -4,7 +4,8 @@ utils = {
         output = '';
 
         for (index = 0; index < arguments.length; index += 2) {
-            output += '<span class="' + arguments[index] + '">' + arguments[index + 1] + '</span>';
+            output += '<span class="' + arguments[index] + '">' + arguments[inde
+x + 1] + '</span>';
         }
 
         return output
@@ -40,7 +41,8 @@ var Commands = function(hostline, user, group) {
 
     var softLink = function(user, group, source, target) {
         return utils.spanText('fghvc54', '[' + source + ']') +
-            ' -- ' +  utils.spanText('softlink-target', '<a class="softlink-target" target="_blank" href=' + target + '>' + target + '</a>');
+            ' -- ' +  utils.spanText('softlink-target', '<a class="softlink-targ
+et" target="_blank" href=' + target + '>' + target + '</a>');
     }
 
     var ddCopyOutput = function(device, size_gb, block_size, duration) {
@@ -48,7 +50,7 @@ var Commands = function(hostline, user, group) {
         var variance = Math.random();
         var true_duration = duration / 1000.0 + variance;
         var throughput = size_gb / true_duration;
-        
+
         // digit-trim hack to work
         var bytes_copied = (size_gb << 20) / 1000;
         bytes_copied <<= 10;
@@ -65,7 +67,8 @@ var Commands = function(hostline, user, group) {
             startDelay: 1250,
             hesitation: 200,
             duration: 0,
-            output: "\nBroadcast message from " + hostline + "\n\t\t(/dev/pts/0) at " +
+            output: "\nBroadcast message from " + hostline + "\n\t\t(/dev/pts/0)
+ at " +
                 utils.padNumber(new Date().getHours(), 2) + ":" +
                 utils.padNumber(new Date().getMinutes(), 2) + "...\n\n" +
                 "The system is going down for halt NOW!"
@@ -90,15 +93,26 @@ var Commands = function(hostline, user, group) {
                 "\n" +
                 "\n" +
                 utils.spanText('fghvc54',  "[discord]") + " -- denyxo" + '\n' +
-                softLink(user, group, 'steam', 'https://steamcommunity.com/id/bioodiust/') +
+                softLink(user, group, 'steam', 'https://steamcommunity.com/id/bi
+oodiust/') +
                 "\n" +
                 "\n" +
                 "-------------------------------------------" +
                 "\n" +
                 "\n" +
-                softLink(user, group, 'twitch', 'https://twitch.tv/denyioi') + '\n' +
-                softLink(user, group, 'spotify', 'https://open.spotify.com/user/60ji81i1at0figf5vqms9g06h') + '\n' +
-                softLink(user, group, 'anime list', 'https://anilist.co/user/deny') + '\n' +
+                softLink(user, group, 'twitch', 'https://twitch.tv/denyioi') + '
+\n' +
+                softLink(user, group, 'spotify', 'https://open.spotify.com/user/
+60ji81i1at0figf5vqms9g06h') + '\n' +
+                softLink(user, group, 'anime list', 'https://anilist.co/user/den
+y') + '\n' +
+        },
+        'dd_partition': {
+            typedCommand: 'dd if=/dev/urandom of=temp.bin bs=4M count=' + (hd_size / 4) + ' status=progress',
+            startDelay: 200,
+            hesitation: 1200,
+            duration: dd_duration,
+            output: ddCopyOutput(dd_device, hd_size, dd_block_size, dd_duration)
         }
     };
 };
@@ -119,10 +133,6 @@ var Scroller = function(target) {
     promptDelay = 1000;
 
     textPos = 0;
-
-    typingAudio = new Audio('sounds/typing.mp3')
-    typingAudio.loop = true;
-    typingAudio.preload = true;
 
     commandList = ['get_users', 'ls_home', 'dd_partition', 'poweroff'];
 
@@ -156,7 +166,8 @@ var Scroller = function(target) {
 
         this.cursorShowing = !this.cursorShowing;
 
-        newText = oldText.substring(0, oldText.length - 1) + this.cursorStates[this.cursorShowing ? 0 : 1];
+        newText = oldText.substring(0, oldText.length - 1) + this.cursorStates[t
+his.cursorShowing ? 0 : 1];
         document.getElementById(target).innerHTML = newText;
         setTimeout(function() {
                 this.updateCursorState(newText);
@@ -164,23 +175,26 @@ var Scroller = function(target) {
             this.cursorSpeed);
     };
 
-    addTypedText = function(targetElement, typedText, commandIndex, typingAudio, originalText, textIndex) {
-        // Could have assumed ECMA6 and done default params but this is more compatible
+    addTypedText = function(targetElement, typedText, commandIndex,
+ originalText, textIndex) {
+        // Could have assumed ECMA6 and done default params but this is more com
+patible
         if (!originalText)
             originalText = targetElement.innerHTML;
 
         if (!textIndex)
             textIndex = 0;
 
-        this.addTextInstant(targetElement, typedText.substring(textIndex, textIndex + 1));
+        this.addTextInstant(targetElement, typedText.substring(textIndex, textIn
+dex + 1));
 
         if (textIndex <= typedText.length) {
             textIndex++;
             if (textIndex == typedText.length) {
-                typingAudio.pause();
                 this.addTextInstant('_');
                 setTimeout(function() {
-                        printCommandOutput(targetElement, command, commandIndex);
+                        printCommandOutput(targetElement, command, commandIndex)
+;
                     },
                     command.hesitation);
             } else {
@@ -190,7 +204,8 @@ var Scroller = function(target) {
                 // console.log("Jitter:", jitteredTextSpeed);
 
                 setTimeout(function() {
-                        this.addTypedText(targetElement, typedText, commandIndex, typingAudio, originalText, textIndex);
+                        this.addTypedText(targetElement, typedText, commandIndex
+, originalText, textIndex);
                     },
                     jitteredTextSpeed);
             }
@@ -198,12 +213,11 @@ var Scroller = function(target) {
     };
 
     typeCommand = function(targetElement, command, index) {
-        typingAudio.play();
-        addTypedText(targetElement, command.typedCommand + '\n', index, typingAudio);
+        addTypedText(targetElement, command.typedCommand + '\n', index);
     };
 
     // Prints the prompt and executes a single command and displays it's output
-    printCommandOutput = function(targetElement, command, commandIndex) {
+    printCommandOutput = function(targetElement, command, commandIndex) {.
         removeCursor(targetElement);
 
         var outputElement = document.createElement('p');

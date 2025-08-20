@@ -7,36 +7,31 @@
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
       <link rel="manifest" href="/site.webmanifest">
-      
-      <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" media="all" />
+
+      <link rel="stylesheet" type="text/css" href="/css/stylesheet.css" media="a
+ll" />
 
       <style type="text/css" media="screen" rel="stylesheet"></style>
 
       <script type="text/javascript" src="/js/main.js"></script>
-      
+
     </head>
   <body class="body" onLoad="new Scroller('textarea')">
     <div id="textarea"></div>
-    <div id="particles-js"></div>
     <div style="position: absolute; z-index: -50; width: 100%; height: 0%">
     </div>
-    
-    <embed name="HER" src="/music/HER.mp3" loop="true" hidden="true" autostart="true">
-
-    <!--<script type="text/javascript" src="/js/particles.js"></script>-->
-    <div id="particles-js"></div>
-    <script type="text/javascript" src="/js/app.js"></script>
-    <script type='text/javascript'> 
+    <script type='text/javascript'>
       title = "ılı.lıllıılı.lıllıılı.lılı.lıllıılı.lıllııllıılı.lıllı";
       position = 0;
       function scrolltitle() {
-          document.title = title.substring(position, title.length) + title.substring(0, position); 
+          document.title = title.substring(position, title.length) + title.subst
+ring(0, position);
           position++;
           if (position > title.length) position = 0;
           titleScroll = window.setTimeout(scrolltitle,170);
       }
       scrolltitle();
       </script>
-  
+
   </body>
 </html>
