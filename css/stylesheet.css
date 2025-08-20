@@ -1,14 +1,15 @@
+/* Import the Poppins font from Google Fonts at the very top */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
-html {
+/* --- SELECTOR REVERTED TO ORIGINAL CLASS --- */
+.html {
   background: radial-gradient(circle farthest-corner, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('../images/bg1.jpg') no-repeat center center fixed;
   background-size: cover;
   background-color: #000;
 }
 
-body {
-  /* --- FONT CHANGE IS HERE --- */
-  font-family: 'Poppins', sans-serif;
+.body {
+  font-family: 'Poppins', sans-serif; /* Poppins is the new default font */
   color: #FFF5E3;
   margin: 2em;
 }
@@ -39,7 +40,7 @@ a:active {
   font-weight: normal !important;
 }
 
-/* This textarea retains the monospace font for a code/terminal feel */
+/* This textarea correctly retains the monospace font for a code/terminal feel */
 #textarea {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
   font-size: 1em;
