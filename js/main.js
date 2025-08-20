@@ -4,8 +4,7 @@ utils = {
         output = '';
 
         for (index = 0; index < arguments.length; index += 2) {
-            output += '<span class="' + arguments[index] + '">' + arguments[inde
-x + 1] + '</span>';
+            output += '<span class="' + arguments[index] + '">' + arguments[index + 1] + '</span>';
         }
 
         return output
@@ -41,8 +40,7 @@ var Commands = function(hostline, user, group) {
 
     var softLink = function(user, group, source, target) {
         return utils.spanText('fghvc54', '[' + source + ']') +
-            ' -- ' +  utils.spanText('softlink-target', '<a class="softlink-targ
-et" target="_blank" href=' + target + '>' + target + '</a>');
+            ' -- ' +  utils.spanText('softlink-target', '<a class="softlink-target" target="_blank" href=' + target + '>' + target + '</a>');
     }
 
     var ddCopyOutput = function(device, size_gb, block_size, duration) {
@@ -67,8 +65,7 @@ et" target="_blank" href=' + target + '>' + target + '</a>');
             startDelay: 1250,
             hesitation: 200,
             duration: 0,
-            output: "\nBroadcast message from " + hostline + "\n\t\t(/dev/pts/0)
- at " +
+            output: "\nBroadcast message from " + hostline + "\n\t\t(/dev/pts/0) at " +
                 utils.padNumber(new Date().getHours(), 2) + ":" +
                 utils.padNumber(new Date().getMinutes(), 2) + "...\n\n" +
                 "The system is going down for halt NOW!"
@@ -93,26 +90,15 @@ et" target="_blank" href=' + target + '>' + target + '</a>');
                 "\n" +
                 "\n" +
                 utils.spanText('fghvc54',  "[discord]") + " -- denyxo" + '\n' +
-                softLink(user, group, 'steam', 'https://steamcommunity.com/id/bi
-oodiust/') +
+                softLink(user, group, 'steam', 'https://steamcommunity.com/id/bioodiust/') +
                 "\n" +
                 "\n" +
                 "-------------------------------------------" +
                 "\n" +
                 "\n" +
-                softLink(user, group, 'twitch', 'https://twitch.tv/denyioi') + '
-\n' +
-                softLink(user, group, 'spotify', 'https://open.spotify.com/user/
-60ji81i1at0figf5vqms9g06h') + '\n' +
-                softLink(user, group, 'anime list', 'https://anilist.co/user/den
-y') + '\n' +
-        },
-        'dd_partition': {
-            typedCommand: 'dd if=/dev/urandom of=temp.bin bs=4M count=' + (hd_size / 4) + ' status=progress',
-            startDelay: 200,
-            hesitation: 1200,
-            duration: dd_duration,
-            output: ddCopyOutput(dd_device, hd_size, dd_block_size, dd_duration)
+                softLink(user, group, 'twitch', 'https://twitch.tv/denyioi') + '\n' +
+                softLink(user, group, 'spotify', 'https://open.spotify.com/user/60ji81i1at0figf5vqms9g06h') + '\n' +
+                softLink(user, group, 'anime list', 'https://anilist.co/user/deny') + '\n' +
         }
     };
 };
@@ -133,6 +119,10 @@ var Scroller = function(target) {
     promptDelay = 1000;
 
     textPos = 0;
+
+    typingAudio = new Audio('sounds/typing.mp3')
+    typingAudio.loop = true;
+    typingAudio.preload = true;
 
     commandList = ['get_users', 'ls_home', 'dd_partition', 'poweroff'];
 
@@ -166,8 +156,7 @@ var Scroller = function(target) {
 
         this.cursorShowing = !this.cursorShowing;
 
-        newText = oldText.substring(0, oldText.length - 1) + this.cursorStates[t
-his.cursorShowing ? 0 : 1];
+        newText = oldText.substring(0, oldText.length - 1) + this.cursorStates[this.cursorShowing ? 0 : 1];
         document.getElementById(target).innerHTML = newText;
         setTimeout(function() {
                 this.updateCursorState(newText);
@@ -175,26 +164,23 @@ his.cursorShowing ? 0 : 1];
             this.cursorSpeed);
     };
 
-    addTypedText = function(targetElement, typedText, commandIndex,
- originalText, textIndex) {
-        // Could have assumed ECMA6 and done default params but this is more com
-patible
+    addTypedText = function(targetElement, typedText, commandIndex, typingAudio, originalText, textIndex) {
+        // Could have assumed ECMA6 and done default params but this is more compatible
         if (!originalText)
             originalText = targetElement.innerHTML;
 
         if (!textIndex)
             textIndex = 0;
 
-        this.addTextInstant(targetElement, typedText.substring(textIndex, textIn
-dex + 1));
+        this.addTextInstant(targetElement, typedText.substring(textIndex, textIndex + 1));
 
         if (textIndex <= typedText.length) {
             textIndex++;
             if (textIndex == typedText.length) {
+                typingAudio.pause();
                 this.addTextInstant('_');
                 setTimeout(function() {
-                        printCommandOutput(targetElement, command, commandIndex)
-;
+                        printCommandOutput(targetElement, command, commandIndex);
                     },
                     command.hesitation);
             } else {
@@ -204,8 +190,7 @@ dex + 1));
                 // console.log("Jitter:", jitteredTextSpeed);
 
                 setTimeout(function() {
-                        this.addTypedText(targetElement, typedText, commandIndex
-, originalText, textIndex);
+                        this.addTypedText(targetElement, typedText, commandIndex, typingAudio, originalText, textIndex);
                     },
                     jitteredTextSpeed);
             }
@@ -213,11 +198,12 @@ dex + 1));
     };
 
     typeCommand = function(targetElement, command, index) {
-        addTypedText(targetElement, command.typedCommand + '\n', index);
+        typingAudio.play();
+        addTypedText(targetElement, command.typedCommand + '\n', index, typingAudio);
     };
 
     // Prints the prompt and executes a single command and displays it's output
-    printCommandOutput = function(targetElement, command, commandIndex) {.
+    printCommandOutput = function(targetElement, command, commandIndex) {
         removeCursor(targetElement);
 
         var outputElement = document.createElement('p');
