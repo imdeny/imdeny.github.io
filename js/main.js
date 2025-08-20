@@ -4,12 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminal = document.getElementById('terminal');
 
     const banner = `
-    d8888b. d888888b d8888b.  .d8888. d88888b d8888b.
-    88  '8D   '88'   88  '8D  88'  YP 88'     88  '8D
-    88oobY'    88    88oobY'  '8bo.   88ooooo 88oobY'
-    88'8b      88    88'8b      'Y8b. 88~~~~~ 88'8b
-    88 '88.   .88.   88 '88.  db   8D 88.     88 '88.
-    88   YD Y888888P 88   YD  '8888Y' Y88888P 88   YD
+     _                  
+  __| | ___ _ __  _   _ 
+ / _`` |/ _ \ '_ \| | | |
+| (_| |  __/ | | | |_| |
+ \__,_|\___|_| |_|\__, |
+                  |___/ 
     `;
 
     const welcomeMessage = "Welcome to deny.gg! Type 'help' for a list of available commands.";
