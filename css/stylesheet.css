@@ -1,18 +1,19 @@
 .html {
-     background: radial-gradient(circle farthest-corner, rgba(0, 0, 0, 0.4), rgb
-a(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('../images/bg1.jpg') no-repeat center
-center fixed;
+     background: radial-gradient(circle farthest-corner, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('../images/bg1.jpg') no-repeat center center fixed;
     background-size: cover;
     background-color: #000;
   }
-
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
   .body {
     /* color: #38e238; */
     color: #FFF5E3;
     margin: 2em;
-    font-family: 'Poppins', sans-serif;
+  }
+
+  @font-face {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-weight: normal;
+    src: "/js/main.js"
   }
 
   a {
