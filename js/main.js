@@ -90,7 +90,6 @@ var Commands = function(hostline, user, group) {
                 "\n" +
                 "\n" +
                 utils.spanText('fghvc54',  "[discord]") + " -- denyxo" + '\n' +
-                utils.spanText('fghvc54',  "[nintendo]") + " -- SW-2447-3939-2099" + '\n' +
                 softLink(user, group, 'steam', 'https://steamcommunity.com/id/bioodiust/') +
                 "\n" +
                 "\n" +
@@ -100,7 +99,6 @@ var Commands = function(hostline, user, group) {
                 softLink(user, group, 'twitch', 'https://twitch.tv/denyioi') + '\n' +
                 softLink(user, group, 'spotify', 'https://open.spotify.com/user/60ji81i1at0figf5vqms9g06h') + '\n' +
                 softLink(user, group, 'anime list', 'https://anilist.co/user/deny') + '\n' +
-                softLink(user, group, 'whi', 'https://weheartit.com/denybtw')
         }
     };
 };
